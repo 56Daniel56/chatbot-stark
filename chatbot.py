@@ -1,20 +1,23 @@
 
 # Daniel Herbert 2018
+# This program simulates a basic chatbot program
 
-# Selecting rows using a search string from keyboard
-
+# sqlite3 is a very easy to use database engine that is embedded with Python
 import sqlite3
-#make the interface tidier by adding a line under each statement
+
+#make the UI a little prettier, by adding a line under each statement
 line = "_______________________________"
 
-sqlite_file = 'chatbot_db.sqlite'    # name of the sqlite database file
+# name of the sqlite database file
+sqlite_file = 'chatbot_db.sqlite'    
 
 # Connecting to the database file, conn = connect, this is required if you want a connection with the database
 conn = sqlite3.connect(sqlite_file)
-#lets the program preform sql comands, very common varible name in sql programing
-cur = conn.cursor()
 
-#start of conversation
+#lets the program perform sql comand
+sql_cursor = conn.cursor()
+
+
 
 #meet and greet message made into function. I have done this because this message needs to be called multible times.                                                                                                                                                                                         
 def welcome_message():
@@ -23,9 +26,15 @@ help you learn about single use plastic bags.\n""" + line)
    print('')
    print("Just ask me anything about plastic bags and I will inform you.\n"+ line)
 
+#start of conversation
 welcome_message()
 
-#while loop to continue asking qustions, I have done this because I want the chat bot to continue asking questions.
+#while loop, continue asking qustions, I have done this because I want the chat bot to continue asking questions.
+# keywords recognised are 'help' and 'quit'
+# help = just reprints the welcome message
+# quit = will allow the program to terminate cleanly
+# otherwise program will continue waiting for an input and comparing the user input with known questions
+# if a match is found, the respective answer is returned otherwise it will ask the user to re-enter the question
 while True:
    print("")
    searchstring = input("What's the question?: ")
@@ -42,8 +51,8 @@ while True:
    if searchstring == "help":
       welcome_message()
       continue
-#comand forsearhing for keyword from input from user and checking it with database
-   cur.execute("select answer from questions where question like ?", (searchstring,) )
+#command for searching based on text entry from input from user and checking it with database
+   sql_cursor.execute("select answer from questions where question like ?", (searchstring,) )
    for row in cur.fetchall():
       print ("\n" + row[0])
       print(line)
