@@ -52,7 +52,7 @@ while True:
       continue
 #command for searching based on text entry from input from user and checking it with database
    sql_cursor.execute("select answer from questions where question like ?", (searchstring,) )
-   for row in cur.fetchall():
+   for row in sql_cursor.fetchall():
       print ("\n" + row[0])
       print(line)
       break
