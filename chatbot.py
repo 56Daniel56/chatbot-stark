@@ -21,7 +21,8 @@ sql_cursor = conn.cursor()
 
 #meet and greet message made into function. I have done this because this message needs to be called multible times.                                                                                                                                                                                         
 def welcome_message():
-   print(line +"\n"   print("""Hello, my name is Stark and I am here to
+   print(line +"\n")
+   print("""Hello, my name is Stark and I am here to
 help you learn about single use plastic bags.\n""" + line)
    print('')
    print("Just ask me anything about plastic bags and I will inform you.\n"+ line)
@@ -53,7 +54,7 @@ while True:
       continue
 #command for searching based on text entry from input from user and checking it with database
    sql_cursor.execute("select answer from questions where question like ?", (searchstring,) )
-   for row in cur.fetchall():
+   for row in sql_cursor.fetchall():
       print ("\n" + row[0])
       print(line)
       break
