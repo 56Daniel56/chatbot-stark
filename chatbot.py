@@ -4,15 +4,15 @@
 # Selecting rows using a search string from keyboard
 
 import sqlite3
-#make the interface tidier by adding a line under each statement
+#make the UI a little prettier, by adding a line under each statement
 line = "_______________________________"
 
 sqlite_file = 'chatbot_db.sqlite'    # name of the sqlite database file
 
 # Connecting to the database file, conn = connect, this is required if you want a connection with the database
 conn = sqlite3.connect(sqlite_file)
-#lets the program preform sql comands, very common varible name in sql programing
-cur = conn.cursor()
+#lets the program perform sql comands, very common varible name in sql programing
+sql_cursor = conn.cursor()
 
 #start of conversation
 
@@ -42,8 +42,8 @@ while True:
    if searchstring == "help":
       welcome_message()
       continue
-#comand forsearhing for keyword from input from user and checking it with database
-   cur.execute("select answer from questions where question like ?", (searchstring,) )
+#command for searching based on text entry from input from user and checking it with database
+   sql_cursor.execute("select answer from questions where question like ?", (searchstring,) )
    for row in cur.fetchall():
       print ("\n" + row[0])
       print(line)
