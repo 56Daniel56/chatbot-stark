@@ -46,7 +46,6 @@ while True:
       print ("\nPlease try again\n"+ line +"\n")
       continue
    if searchstring == "quit":
-      print("Thanks, bye.")
       break
    if searchstring == "help":
       welcome_message()
@@ -60,8 +59,11 @@ while True:
    else:
       print("\nSorry, I dont understand. Please rephrase or change you question\n" + line)
       print('')
-
-# Committing changes and closing the connection to the database file
-conn.commit()
+#end of the while true loop
+    
+# program closing down
+print("Thanks, bye.")         
+         
+# closing the connection to the database file
 conn.close()
 
